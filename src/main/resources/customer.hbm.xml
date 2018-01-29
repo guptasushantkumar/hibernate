@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 15, 2015 8:17:19 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.journaldev.hibernate.model.Customer" table="customer"
+		catalog="sushant">
+		<id name="txnId" type="int">
+			<column name="txn_id" />
+			<generator class="foreign">
+				<param name="property">transaction</param>
+			</generator>
+		</id>
+
+		<one-to-one name="transaction"
+			class="com.journaldev.hibernate.model.Transaction"  constrained="true"></one-to-one>
+		<property name="custName" type="string">
+			<column name="cust_name" length="20" not-null="true" />
+		</property>
+		<property name="custEmail" type="string">
+			<column name="cust_email" length="20" />
+		</property>
+		<property name="custAddress" type="string">
+			<column name="cust_address" length="50" not-null="true" />
+		</property>
+
+		<subclass name="Employee" extends="Person"
+			discriminator-value="E">
+			<property name="departmentName" type="string" column="department_name" />
+			<property name="joiningDate" type="date" column="joining_date" />
+		</subclass>
+	</class>
+</hibernate-mapping>

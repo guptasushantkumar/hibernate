@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 15, 2015 8:58:53 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.journaldev.hibernate.model.Cart" table="cart"
+		catalog="sushant">
+		<id name="cartId" type="java.lang.Integer">
+			<column name="cart_id" />
+			<generator class="identity" />
+		</id>
+		<property name="cartTotal" type="long">
+			<column name="cart_total" precision="10" scale="0" not-null="true" />
+		</property>
+		<set name="items" table="cart_items" inverse="false" lazy="true"
+			fetch="select" cascade="all">
+			<key>
+				<column name="cart_id" not-null="true" />
+			</key>
+			<many-to-many class="com.journaldev.hibernate.model.Item"
+				column="item_id" >
+			</many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
